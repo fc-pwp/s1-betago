@@ -23,8 +23,9 @@ def quiz_start(request, pk):
     elif request.method == 'POST':
         form = UserResultForm(request.POST)
         if form.is_valid():
-            new_user_result = form.save()
-            return redirect()
+            new_user_result = form.save(commit=False)
+            new_user_result.quiz = quiz
+            return redirect('question_view', pk=quiz.pk, order=1)
 
     ctx = {
         'form': form,
