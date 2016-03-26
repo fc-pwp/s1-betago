@@ -4,11 +4,17 @@ from django.db import models
 class Quiz(models.Model):
     title = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.title
+
 
 class Question(models.Model):
     content = models.TextField(max_length=500)
     quiz = models.ForeignKey(Quiz)
     order = models.SmallIntegerField(default=1)
+
+    def __str__(self):
+        return 'Quiz {} - {}'.format(self.quiz.pk, self.order)
 
 
 class Answer(models.Model):
