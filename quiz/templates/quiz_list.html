@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+    {% for quiz in object_list %}
+    <div>
+        {{ quiz.title }}
+    </div>
+    {% empty %}
+    <p>준비된 퀴즈가 없습니다.</p>
+    {% endfor %}
+
+{% endblock %}
+
