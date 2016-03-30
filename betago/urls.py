@@ -13,6 +13,10 @@ urlpatterns = [
         quiz_views.question_view, name='question_view',
     ),
     url(
+        r'^quiz/(?P<pk>[0-9]+)/result/$',
+        quiz_views.quiz_result, name='quiz_result',
+    ),
+    url(
         r'^quiz/(?P<pk>[0-9]+)/start/$',
         quiz_views.quiz_start, name='quiz_start'
     ),

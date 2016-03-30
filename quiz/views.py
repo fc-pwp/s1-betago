@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 
 from .models import Answer
+from .models import QuizResult
 from .models import Quiz
 from .models import UserResult
 from .forms import UserResultForm
@@ -80,11 +81,16 @@ def question_view(request, pk, order):
             user_result.scores += answer.score
             user_result.save()
             request.session[session_key_name] = question.order
-            return redirect(
-                'question_view',
-                pk=quiz.pk,
-                order=question.order+1
-            )
+
+            last_question = quiz.question_set.order_by('-order').first()
+            if question.order < last_question.order:
+                return redirect(
+                    'question_view',
+                    pk=quiz.pk,
+                    order=question.order+1
+                )
+            else:
+                return redirect('quiz_result')
 
     elif request.method == 'GET':
         form = AnswerForm()
@@ -95,4 +101,25 @@ def question_view(request, pk, order):
     }
 
     return render(request, 'question_view.html', ctx)
+
+
+def quiz_result(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk)
+    user_result_pk = request.session['user_result_pk']
+    user_result = get_object_or_404(UserResult, pk=user_result_pk)
+
+    scores = user_result.scores
+
+    qr_qs = QuizResult.objects.filter(
+        quiz=quiz,
+        min_scores__gte=scores,
+        max_scores__lte=scores,
+    )
+    if qr_qs.exists():
+        raise Exception('으앙 없는 결과...')
+
+    ctx = {
+        'quiz_result': qr_qs.first(),
+    }
+    return render(request, 'quiz_result.html', ctx)
 
