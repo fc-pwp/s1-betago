@@ -8,9 +8,14 @@
 
 <form method="POST" action="">
     {% csrf_token %}
+
+    {% if form.errors.order %}
+        {{ form.order.errors }}
+    {% endif %}
+
 {% for answer in question.answer_set.all %}
     <div>
-        <input type="radio" name="answer" value="{{ answer.order }}" />
+        <input type="radio" name="order" value="{{ answer.order }}" />
         <span>{{ answer.order }}</span> : {{ answer.content }}
     </div>
 {% endfor %}

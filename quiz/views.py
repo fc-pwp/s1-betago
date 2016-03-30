@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 
 from .models import Quiz
 from .forms import UserResultForm
+from .forms import AnswerForm
 
 
 def quiz_list(request):
@@ -41,8 +42,18 @@ def question_view(request, pk, order):
     if not qs.exists():
         raise Http404
 
+    question = qs[0]  # or `qs.first()`
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            pass
+    elif request.method == 'GET':
+        form = AnswerForm()
+
     ctx = {
-        'question': qs[0],  # or `qs.first()`
+        'form': form,
+        'question': question,
     }
 
     return render(request, 'question_view.html', ctx)
