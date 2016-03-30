@@ -51,10 +51,8 @@ def question_view(request, pk, order):
     session_key_name = 'quiz{}_question'.format(quiz.pk)
 
     if session_key_name not in request.session:
-        if question.order > 1:
-            return redirect('quiz_start', pk=quiz.pk)
-        else:
-            request.session[session_key_name] = question.order - 1
+        request.session[session_key_name] = 0
+        return redirect('quiz_start', pk=quiz.pk)
     else:
         if request.session[session_key_name] + 1 > question.order:
             return redirect(
