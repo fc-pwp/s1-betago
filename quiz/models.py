@@ -23,6 +23,9 @@ class Answer(models.Model):
     order = models.SmallIntegerField(default=1)
     question = models.ForeignKey(Question)
 
+    class Meta:
+        ordering = ['order', ]
+
 
 class UserResult(models.Model):
     _genders = (

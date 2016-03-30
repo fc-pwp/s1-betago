@@ -6,11 +6,19 @@
 
 <h1>{{ question.quiz.title }}의 {{ question.order }}번 문제</h1>
 
+<form method="POST" action="">
+    {% csrf_token %}
 {% for answer in question.answer_set.all %}
     <div>
+        <input type="radio" name="answer" value="{{ answer.order }}" />
         <span>{{ answer.order }}</span> : {{ answer.content }}
     </div>
 {% endfor %}
+
+    <p>
+        <button type="submit">다음</button>
+    </p>
+</form>
 
 {% endblock %}
 

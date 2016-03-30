@@ -111,7 +111,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static1'),
-    os.path.join(BASE_DIR, 'static2'),
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
