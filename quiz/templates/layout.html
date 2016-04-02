@@ -4,6 +4,15 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block page_title%}Betago에 오신 걸 환영합니다.{% endblock %}</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(e) {
+                var callback = function(data) {
+                    console.log(data);
+                }
+                $.getJSON('/ajax_test/', callback);
+            });
+        </script>
     </head>
 
     <body>

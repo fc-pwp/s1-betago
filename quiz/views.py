@@ -10,6 +10,18 @@ from .models import UserResult
 from .forms import UserResultForm
 from .forms import AnswerForm
 
+import json
+from django.http import JsonResponse
+
+
+def ajax_test(request):
+    quiz = Quiz.objects.last()
+    data = {
+        'pk': quiz.pk,
+        'title': quiz.title,
+    }
+    return JsonResponse(data)
+
 
 def quiz_list(request):
     object_list = Quiz.objects.order_by('?')

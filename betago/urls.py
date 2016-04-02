@@ -23,6 +23,7 @@ urlpatterns = [
     ),
     url(r'^main/$', quiz_views.quiz_list, name='main'),
     url(r'^admin/', admin.site.urls),
+    url(r'^ajax_test/$', quiz_views.ajax_test),
     url('', include('social.apps.django_app.urls', namespace='social')),
 ]
 
