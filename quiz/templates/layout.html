@@ -8,7 +8,11 @@
         <script>
             $(document).ready(function(e) {
                 var callback = function(data) {
-                    console.log(data);
+                    var elements = [];
+                    elements.push('<h3>'+data.title+'</h3>');
+                    elements.push('<p>'+String(data.pk)+'</p>');
+
+                    $('#ajax_test_div').append(elements.join(''));
                 }
                 $.getJSON('/ajax_test/', callback);
             });
@@ -16,6 +20,8 @@
     </head>
 
     <body>
+
+        <div id="ajax_test_div"></div>
 
         {% block content %}{% endblock %}
 
