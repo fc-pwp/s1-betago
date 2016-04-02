@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.conf.urls import include
 from django.contrib import admin
 
 from django.conf.urls.static import static
@@ -22,6 +23,7 @@ urlpatterns = [
     ),
     url(r'^main/$', quiz_views.quiz_list, name='main'),
     url(r'^admin/', admin.site.urls),
+    url('', include('social.apps.django_app.urls', namespace='social')),
 ]
 
 urlpatterns += static(

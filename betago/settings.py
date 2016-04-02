@@ -15,6 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOGIN_REDIRECT_URL = '/main/'
 
 # Application definition
 
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'quiz',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -118,5 +120,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static_deploy')
 MEDIA_URL = '/uploads/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload_files')
+
+SOCIAL_AUTH_FACEBOOK_KEY = '483988478474493'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'a89175271f58283de415d096ad3af174'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+
+
+
 
 
