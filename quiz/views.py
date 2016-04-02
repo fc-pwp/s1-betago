@@ -90,7 +90,7 @@ def question_view(request, pk, order):
                     order=question.order+1
                 )
             else:
-                return redirect('quiz_result')
+                return redirect('quiz_result', pk=quiz.pk)
 
     elif request.method == 'GET':
         form = AnswerForm()
